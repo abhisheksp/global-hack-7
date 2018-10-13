@@ -5,6 +5,9 @@
 __pycache__/
 
 # Ignore certificates
+service.json
+twilio.json
+cipher_key.txt
 
 # User-specific stuff
 .idea/**/workspace.xml

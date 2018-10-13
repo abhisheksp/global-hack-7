@@ -14,7 +14,6 @@ cipher_key = ''
 with open('cipher_key.txt') as f:
     cipher_key = bytes(f.readline(), 'utf-8')
 
-print('CK:', cipher_key)
 cipher_suite = Fernet(cipher_key)
 
 

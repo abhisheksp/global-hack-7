@@ -17,5 +17,12 @@ def broadcast_handler():
     status = broadcast(message)
     return status
 
+
+@app.route('/messagecallback', methods=['POST'])
+def message_callback_handler():
+    message = request.values.get('Body', None)
+    status = broadcast(message)
+    return status
+
 if __name__ == '__main__':
     app.run()

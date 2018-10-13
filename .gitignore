@@ -8,6 +8,7 @@ __pycache__/
 service.json
 twilio.json
 cipher_key.txt
+twitter.json
 
 # User-specific stuff
 .idea/**/workspace.xml

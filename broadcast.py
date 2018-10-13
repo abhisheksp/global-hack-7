@@ -3,7 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 from cryptography.fernet import Fernet
 from whatsapp import send_messages
-
+from twitter import tweet
 
 cred = credentials.Certificate('service.json')
 firebase_admin.initialize_app(cred, {
@@ -29,4 +29,5 @@ def broadcast(message):
     numbers = find_numbers()
     print('found numbers:', numbers)
     send_messages(numbers, message)
+    tweet(message)
     return 'Broadcast successful!'

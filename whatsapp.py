@@ -1,7 +1,7 @@
 import json
 from twilio.rest import Client
 
-clint = None
+client = None
 with open('twilio.json') as f:
     data = json.load(f)
     account_sid = data['account_sid']

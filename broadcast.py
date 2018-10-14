@@ -1,4 +1,5 @@
 import firebase_admin
+import requests
 from firebase_admin import credentials
 from firebase_admin import db
 from cryptography.fernet import Fernet
@@ -24,10 +25,24 @@ def find_numbers():
     return numbers
 
 
+def find_group_ids():
+    group_ids = db.reference('/group_ids').get()
+    return group_ids
+
+
+def facebook_group_post(message):
+    group_ids = find_group_ids()
+    print('Group IDS: ', group_ids)
+    url = 'https://cce34c71.ngrok.io/grouppost'
+    payload = {'message': message, 'groupids': group_ids}
+    requests.post(url, json=payload)
+
+
 def broadcast(message):
     print('message: ', message)
     numbers = find_numbers()
     print('found numbers:', numbers)
     send_messages(numbers, message)
     tweet(message)
+    facebook_group_post(message)
     return 'Broadcast successful!'

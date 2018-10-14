@@ -26,11 +26,39 @@ def facebook_group_post(message):
     requests.post(url, json=payload)
 
 
-def broadcast(message):
+def save_event(message, from_number, event_metadata):
+    location = event_metadata['location']
+    nationality = event_metadata['nationality']
+    group_name = event_metadata['groupName']
+    data = {
+        "event": message,
+        "patronPhone": from_number,
+        "location": location,
+        "nationality": nationality,
+        "messengerType": 'Whatsapp',
+        "groupName": group_name
+    }
+    root = db.reference()
+    root.child('events').push(data)
+
+
+def identify_event_metadata(from_number):
+    found_patrons = list(db.reference('patron').order_by_child("phone").equal_to(from_number).get().values())
+    if len(found_patrons) == 0:
+        return None, False
+    patron = found_patrons[0]
+    return patron, True
+
+
+def broadcast(from_number, message):
     print('message: ', message)
     numbers = find_numbers()
     print('found numbers:', numbers)
     send_messages(numbers, message)
     tweet(message)
     facebook_group_post(message)
+    metadata, found = identify_event_metadata(from_number)
+    if not found:
+        return 'Broadcast successful but unknown Patron'
+    save_event(message, from_number, metadata)
     return 'Broadcast successful!'

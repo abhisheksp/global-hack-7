@@ -23,7 +23,8 @@ def broadcast_handler():
 @app.route('/messagecallback', methods=['POST'])
 def message_callback_handler():
     message = request.values.get('Body', None)
-    status = broadcast(message)
+    from_number = request.values.get('From', None)
+    status = broadcast(from_number, message)
     return status
 
 

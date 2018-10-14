@@ -13,7 +13,7 @@ def send_message(number, message):
     message = client.messages.create(
         body=message,
         from_='whatsapp:+14155238886',
-        to='whatsapp:+1{}'.format(number)
+        to='whatsapp:{}'.format(number)
     )
     print(message.sid)
     return "Success"

@@ -1,0 +1,4 @@
+Flask==1.0.2
+gunicorn==19.9.0
+selenium==3.14.1
+chromedriver-installer==0.0.6

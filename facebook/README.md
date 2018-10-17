@@ -10,3 +10,13 @@
 
 Your API should be accessible locally.
 ###TODO: Build custom docker to install and run selenium dependencies
+
+### Required JSON:
+
+creds.json
+```
+{
+  "username": "username",
+  "password": "password"
+}
+```
